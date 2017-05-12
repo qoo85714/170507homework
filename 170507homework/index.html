@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<script src="js/jquery.js"></script>
+<script src="js/seedrandom.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/jquery.toast.css">
+<!---------------------------------->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+#randomTable {
+    font-family: monospace;
+    font-size: 2.0em;
+}
+body {
+    background-image: url("kumamon.jpg");
+}
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+.center2 {
+    margin: auto;
+    width: 50%;
+   
+    padding: 10px;
+}
+.right {
+    position: static;
+    right: 0px;
+    width: 300px;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+.floating-box {
+    float: right;
+    width: 300px;
+    height:300px;
+    margin: 10px;
+    border: 3px solid #73AD21;  
+}
+</style>
+</head>
+<body style="background-color:powderblue;">
+<div id="tabs" class="center">
+  <ul>
+    <li><a href="#tabs-1">使用說明</a></li>
+    <li><a href="#tabs-2">STEP 1</a></li>
+    <li><a href="#tabs-3">STEP 2</a></li>
+    <li><a href="#tabs-4">STEP 3</a></li>
+    <li><a href="#tabs-5">STEP 4</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>好密碼的條件：愈長、愈亂、愈與個人資料無關。問題是，這樣子的密碼會不會就愈記不住？
+
+於是，某人就想啦－－既然記不住，不如就將密碼寫下來，例如，銀行密碼就寫在提款卡的背面，但是，最重要的就是但是：不要寫得太直白。
+
+怎麼辦呢</p>
+  </div>
+  <div id="tabs-2">
+    <p>1.	先輸入數字 選擇產生亂數</p>
+  </div>
+  <div id="tabs-3">
+    <p>2.	在便條上記下 偶數個數字
+       例如13 58 24 97 36
+                         </p>
+  </div>
+   <div id="tabs-4">
+    <p>3.	密碼則為<br>
+       第一行列的第3個:<br>
+       第五行列的第8個:<br>
+       第二行列的第4個:<br>
+       第九行列的第7個:<br>
+       第三行列的第6個:<br>
+    </p>
+  </div>
+    <div id="tabs-5">
+    <p>4.以後只需要輸入數字 再對照便條紙上的規則就可以產生密碼</p>
+  </div>
+</div>    
+<div class="container center">    
+
+    <form class="form-inline">
+        <div class="form-group ">
+        <label class="control-label ">
+		<span class="glyphicon glyphicon-user"></span> 
+		請輸入任意數字：
+	     </label>
+		</div>
+		<div class="form-group ">
+		
+
+        <input type="text" class="form-control" id="txtSeed" placeholder="請輸入數字" >
+        </div>
+        
+        
+        <input type="button" class="btn btn-primary btn-md" id="btnGo" value="產生亂數表" onclick="play()" />
+        <audio id="audio" src="melody/Mix02.wav" ></audio>
+        
+    </form>
+    <!--</div>-->
+</div> 
+<div class="container center2"> 
+<div id="randomTable" style="background-color:powderblue;">
+</div>
+</div>
+<script>
+
+$("#btnGo").click(function () {
+    var result = "";
+	// 純數字:
+	var sPool = "0123456789";
+    // 數字+小寫字母: (去除 l, o)
+    // var sPool = "abcdefghijkmnpqrstuvwxyz0123456789";
+    // 數字+大小寫字母: (去除 I, O, l, o)
+    // var sPool = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789";
+
+    Math.seedrandom($("#txtSeed").val()); // 設定亂數種子
+	var iRandom = 0; var ch = "?";
+	for (iRow = 1; iRow <= 10; iRow++) {
+		var sLine = (iRow + 100).toString().substr(1, 2) + ": ";
+		for (iCol = 1; iCol <= 10; iCol++) {
+			iRandom = Math.floor(Math.random() * sPool.length);
+			ch = sPool.substr(iRandom, 1);
+			sLine += ch;
+		}
+		result += sLine + "<br>";
+	}
+	$("#randomTable").html(result);
+});
+
+  function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+ $( function() {
+    $( "#tabs" ).tabs();
+  } );
+              
+                 
+                 
+
+</script>
+
+</body>
+</html>
